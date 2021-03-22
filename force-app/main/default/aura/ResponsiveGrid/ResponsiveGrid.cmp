@@ -1,0 +1,27 @@
+<aura:component >
+	<aura:attribute name="gridData" type="Object"/>    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>   
+    
+<div class="slds">
+<table class="slds-table slds-table--bordered">    	
+<thead>
+<tr class="slds-text-heading--label">            	
+                 <aura:iteration items="{!v.gridData.headers}" var="col">                     
+<th class="{!col.cssClass}"> {!col.title} </th>  
+                </aura:iteration>                
+            </tr>        	 
+        </thead>
+<tbody>
+            <!-- Limitation - we cannot use indexvar of iterator control to refer header json information else, instead of defining css class for each column, we could have used it from header only -->
+            <aura:iteration items="{!v.gridData.rows}" var="row">
+                
+<tr class="slds-hint-parent"> 
+                	<aura:iteration items="{!row.vals}" var="col" indexVar="idx">                         
+<td class="{!col.cssClass}">{!col.val}</td> 
+                    </aura:iteration>
+                </tr>
+             </aura:iteration>              
+        </tbody>    
+    	</table>
+    </div>
+</aura:component>
